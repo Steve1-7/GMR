@@ -23,7 +23,10 @@ function mapAd(ad: Record<string, unknown>) {
 
 export async function GET(request: NextRequest) {
   const db = getAdminClient();
-  if (!db) return dbUnavailable();
+  if (!db) {
+    console.error('Database client unavailable in /api/ads');
+    return dbUnavailable();
+  }
 
   try {
     const type = request.nextUrl.searchParams.get('type');
@@ -39,7 +42,10 @@ export async function GET(request: NextRequest) {
     }
 
     const { data, error } = await query.limit(20);
-    if (error) return dbError('Error fetching ads', error);
+    if (error) {
+      console.error('Error fetching ads:', error);
+      return dbError('Error fetching ads', error);
+    }
 
     const now = new Date();
     const filtered = (data || []).filter((ad: Record<string, unknown>) => {
@@ -52,6 +58,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ data: filtered.map(mapAd) });
   } catch (err) {
+    console.error('Unexpected error in /api/ads:', err);
     return dbError('Unexpected error', err);
   }
 }

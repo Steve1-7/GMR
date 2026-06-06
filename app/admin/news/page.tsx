@@ -89,18 +89,34 @@ export default function AdminNews() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const slug = formData.slug || generateSlug(formData.title);
-    const { error } = await supabase
+    
+    // Prepare payload with only valid database columns
+    const payload = {
+      title: formData.title,
+      slug: slug,
+      excerpt: formData.excerpt || '',
+      content: formData.content || '',
+      category: formData.category || 'news',
+      featured_image: formData.featured_image || '',
+      author_id: formData.author_id || null,
+      is_premium: formData.is_premium || false,
+      tags: formData.tags && formData.tags.length > 0 ? formData.tags : null,
+      reading_time: formData.reading_time ? parseInt(String(formData.reading_time)) : 5,
+      published_at: new Date().toISOString()
+    };
+
+    console.log('Creating article with payload:', payload);
+
+    const { error, data } = await supabase
       .from('articles')
-      .insert([{
-        ...formData,
-        slug,
-        tags: formData.tags.length > 0 ? formData.tags : null,
-        reading_time: formData.reading_time ? parseInt(String(formData.reading_time)) : 5
-      }]);
+      .insert([payload])
+      .select();
 
     if (error) {
-      setNotification({ show: true, type: 'error', message: 'Failed to create article' });
+      console.error('Article creation error:', error);
+      setNotification({ show: true, type: 'error', message: `Failed to create article: ${error.message}` });
     } else {
+      console.log('Article created successfully:', data);
       setNotification({ show: true, type: 'success', message: 'Article created successfully!' });
       setShowAddModal(false);
       setFormData({
@@ -113,18 +129,33 @@ export default function AdminNews() {
   };
 
   const handleUpdate = async () => {
-    const { error } = await supabase
+    const payload = {
+      title: formData.title,
+      slug: formData.slug,
+      excerpt: formData.excerpt || '',
+      content: formData.content || '',
+      category: formData.category || 'news',
+      featured_image: formData.featured_image || '',
+      author_id: formData.author_id || null,
+      is_premium: formData.is_premium || false,
+      tags: formData.tags && formData.tags.length > 0 ? formData.tags : null,
+      reading_time: formData.reading_time ? parseInt(String(formData.reading_time)) : 5,
+      updated_at: new Date().toISOString()
+    };
+
+    console.log('Updating article with payload:', payload);
+
+    const { error, data } = await supabase
       .from('articles')
-      .update({
-        ...formData,
-        tags: formData.tags.length > 0 ? formData.tags : null,
-        reading_time: formData.reading_time ? parseInt(String(formData.reading_time)) : 5
-      })
-      .eq('id', selectedArticle.id);
+      .update(payload)
+      .eq('id', selectedArticle.id)
+      .select();
 
     if (error) {
-      setNotification({ show: true, type: 'error', message: 'Failed to update article' });
+      console.error('Article update error:', error);
+      setNotification({ show: true, type: 'error', message: `Failed to update article: ${error.message}` });
     } else {
+      console.log('Article updated successfully:', data);
       setNotification({ show: true, type: 'success', message: 'Article updated successfully!' });
       setShowEditModal(false);
       setSelectedArticle(null);
@@ -135,14 +166,17 @@ export default function AdminNews() {
 
   const handleDelete = async (id: any) => {
     if (confirm('Are you sure you want to delete this article? This action cannot be undone.')) {
+      console.log('Deleting article with id:', id);
       const { error } = await supabase
         .from('articles')
         .delete()
         .eq('id', id);
 
       if (error) {
-        setNotification({ show: true, type: 'error', message: 'Failed to delete article' });
+        console.error('Article deletion error:', error);
+        setNotification({ show: true, type: 'error', message: `Failed to delete article: ${error.message}` });
       } else {
+        console.log('Article deleted successfully');
         setNotification({ show: true, type: 'success', message: 'Article deleted successfully!' });
         fetchArticles();
         setTimeout(() => setNotification({ show: false, type: 'success', message: '' }), 3000);

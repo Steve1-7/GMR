@@ -4,7 +4,10 @@ import { dbError, dbUnavailable, getAdminClient } from '@/lib/api-utils';
 
 export async function GET(request: NextRequest) {
   const db = getAdminClient();
-  if (!db) return dbUnavailable();
+  if (!db) {
+    console.error('Database client unavailable in /api/settings');
+    return dbUnavailable();
+  }
 
   try {
     const key = request.nextUrl.searchParams.get('key');
@@ -15,7 +18,10 @@ export async function GET(request: NextRequest) {
     }
 
     const { data, error } = await query;
-    if (error) return dbError('Error fetching settings', error);
+    if (error) {
+      console.error('Error fetching settings:', error);
+      return dbError('Error fetching settings', error);
+    }
 
     if (key) {
       const row = data?.[0];
@@ -28,6 +34,7 @@ export async function GET(request: NextRequest) {
     });
     return NextResponse.json({ data: settings });
   } catch (err) {
+    console.error('Unexpected error in /api/settings GET:', err);
     return dbError('Unexpected error', err);
   }
 }
@@ -37,7 +44,10 @@ export async function PUT(request: NextRequest) {
   if (unauthorized) return unauthorized;
 
   const db = getAdminClient();
-  if (!db) return dbUnavailable();
+  if (!db) {
+    console.error('Database client unavailable in /api/settings PUT');
+    return dbUnavailable();
+  }
 
   try {
     const body = await request.json();
@@ -50,9 +60,13 @@ export async function PUT(request: NextRequest) {
       .select()
       .single();
 
-    if (error) return dbError('Error saving settings', error);
+    if (error) {
+      console.error('Error saving settings:', error);
+      return dbError('Error saving settings', error);
+    }
     return NextResponse.json({ data });
   } catch (err) {
+    console.error('Unexpected error in /api/settings PUT:', err);
     return dbError('Unexpected error', err);
   }
 }
