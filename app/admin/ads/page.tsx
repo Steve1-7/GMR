@@ -24,6 +24,7 @@ interface Advertisement {
   is_active: boolean;
   start_date?: string;
   end_date?: string;
+  priority?: number;
 }
 
 export default function AdminAds() {
@@ -81,14 +82,15 @@ export default function AdminAds() {
       .insert([{
         ...formData,
         start_date: formData.start_date ? new Date(formData.start_date).toISOString() : null,
-        end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null
+        end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null,
+        priority: formData.priority || 0
       }]);
 
     if (error) {
       console.error('Error creating ad:', error);
     } else {
       setShowAddModal(false);
-      setFormData({ title: '', company_name: '', company_logo: '', image_url: '', link_url: '', type: 'banner', category: '', is_active: true, start_date: '', end_date: '' });
+      setFormData({ title: '', company_name: '', company_logo: '', image_url: '', link_url: '', type: 'banner', category: '', is_active: true, start_date: new Date().toISOString().slice(0, 16), end_date: '', priority: 0 });
       fetchAds();
     }
   };
@@ -100,7 +102,8 @@ export default function AdminAds() {
       .update({
         ...formData,
         start_date: formData.start_date ? new Date(formData.start_date).toISOString() : null,
-        end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null
+        end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null,
+        priority: formData.priority || 0
       })
       .eq('id', selectedAd.id);
 
@@ -151,7 +154,8 @@ export default function AdminAds() {
       category: ad.category || '',
       is_active: ad.is_active,
       start_date: ad.start_date ? ad.start_date.split('T')[0] : '',
-      end_date: ad.end_date ? ad.end_date.split('T')[0] : ''
+      end_date: ad.end_date ? ad.end_date.split('T')[0] : '',
+      priority: ad.priority || 0
     });
     setShowEditModal(true);
   };
