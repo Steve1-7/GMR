@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const podcastsOnly = request.nextUrl.searchParams.get('podcasts');
-    let query = db.from('videos').select('*').order('created_at', { ascending: false });
+    let query = db.from('videos').select('*').order('published_at', { ascending: false });
 
     if (podcastsOnly === 'true') {
       query = query.eq('is_podcast', true);

@@ -31,7 +31,8 @@ export default function AdminPodcasts() {
     thumbnail: '',
     audio_url: '',
     duration: '',
-    episode_number: ''
+    episode_number: '',
+    published_at: new Date().toISOString().slice(0, 16)
   });
 
   useEffect(() => {
@@ -77,7 +78,8 @@ export default function AdminPodcasts() {
         ...formData,
         slug,
         duration: formData.duration ? parseInt(String(formData.duration)) : 0,
-        episode_number: formData.episode_number ? parseInt(String(formData.episode_number)) : 0
+        episode_number: formData.episode_number ? parseInt(String(formData.episode_number)) : 0,
+        published_at: formData.published_at ? new Date(formData.published_at).toISOString() : new Date().toISOString()
       }]);
 
     if (error) {
@@ -86,7 +88,8 @@ export default function AdminPodcasts() {
       setNotification({ show: true, type: 'success', message: 'Podcast created successfully!' });
       setShowAddModal(false);
       setFormData({
-        title: '', slug: '', description: '', thumbnail: '', audio_url: '', duration: '', episode_number: ''
+        title: '', slug: '', description: '', thumbnail: '', audio_url: '', duration: '', episode_number: '',
+        published_at: new Date().toISOString().slice(0, 16)
       });
       fetchPodcasts();
       setTimeout(() => setNotification({ show: false, type: 'success', message: '' }), 3000);

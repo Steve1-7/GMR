@@ -36,7 +36,8 @@ export default function AdminNews() {
     author_id: '',
     is_premium: false,
     tags: [],
-    reading_time: 5
+    reading_time: 5,
+    published_at: new Date().toISOString().slice(0, 16)
   });
 
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function AdminNews() {
       is_premium: formData.is_premium || false,
       tags: formData.tags && formData.tags.length > 0 ? formData.tags : null,
       reading_time: formData.reading_time ? parseInt(String(formData.reading_time)) : 5,
-      published_at: new Date().toISOString()
+      published_at: formData.published_at ? new Date(formData.published_at).toISOString() : new Date().toISOString()
     };
 
     console.log('Creating article with payload:', payload);
@@ -121,7 +122,8 @@ export default function AdminNews() {
       setShowAddModal(false);
       setFormData({
         title: '', slug: '', excerpt: '', content: '', category: 'news',
-        featured_image: '', author_id: '', is_premium: false, tags: [], reading_time: 5
+        featured_image: '', author_id: '', is_premium: false, tags: [], reading_time: 5,
+        published_at: new Date().toISOString().slice(0, 16)
       });
       fetchArticles();
       setTimeout(() => setNotification({ show: false, type: 'success', message: '' }), 3000);

@@ -9,7 +9,7 @@ export async function GET() {
     const { data, error } = await db
       .from('magazines')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('date', { ascending: false });
 
     if (error) return dbError('Error fetching magazines', error);
     return NextResponse.json({ data: data || [] });

@@ -43,8 +43,9 @@ export default function AdminAds() {
     type: 'banner',
     category: '',
     is_active: true,
-    start_date: '',
-    end_date: ''
+    start_date: new Date().toISOString().slice(0, 16),
+    end_date: '',
+    priority: 0
   });
 
   useEffect(() => {

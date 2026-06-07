@@ -18,8 +18,8 @@ const emptyForm = {
   summary: '',
   article_url: '',
   featured_image: '',
-  publish_date: '',
-  status: 'draft',
+  publish_date: new Date().toISOString().slice(0, 16),
+  status: 'published',
   priority: 0,
 };
 

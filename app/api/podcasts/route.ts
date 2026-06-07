@@ -9,7 +9,7 @@ export async function GET() {
     const { data, error } = await db
       .from('podcasts')
       .select('*')
-      .order('episode_number', { ascending: false });
+      .order('published_at', { ascending: false });
 
     if (error) return dbError('Error fetching podcasts', error);
     return NextResponse.json({ data: data || [] });

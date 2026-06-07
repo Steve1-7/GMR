@@ -30,7 +30,8 @@ export default function AdminVideos() {
     thumbnail: '',
     video_url: '',
     duration: 0,
-    category: 'interview'
+    category: 'interview',
+    published_at: new Date().toISOString().slice(0, 16)
   });
 
   useEffect(() => {
@@ -75,7 +76,8 @@ export default function AdminVideos() {
       .insert([{
         ...formData,
         slug,
-        duration: formData.duration ? parseInt(formData.duration) : 0
+        duration: formData.duration ? parseInt(formData.duration) : 0,
+        published_at: formData.published_at ? new Date(formData.published_at).toISOString() : new Date().toISOString()
       }]);
 
     if (error) {
@@ -84,7 +86,8 @@ export default function AdminVideos() {
       setNotification({ show: true, type: 'success', message: 'Video created successfully!' });
       setShowAddModal(false);
       setFormData({
-        title: '', slug: '', description: '', thumbnail: '', video_url: '', duration: 0, category: 'interview'
+        title: '', slug: '', description: '', thumbnail: '', video_url: '', duration: 0, category: 'interview',
+        published_at: new Date().toISOString().slice(0, 16)
       });
       fetchVideos();
       setTimeout(() => setNotification({ show: false, type: 'success', message: '' }), 3000);
