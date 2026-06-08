@@ -67,8 +67,8 @@ export default function Footer() {
             Delivering news, data, and insights to mining investors and industry leaders.
           </p>
           <div className="mt-6 space-y-2">
-            <a href="tel:+27717856901" className="block text-sm text-muted-foreground hover:text-gold transition-colors">
-              +27 71 785 6901
+            <a href="tel:+2332433352901" className="block text-sm text-muted-foreground hover:text-gold transition-colors">
+              +2332433352901
             </a>
             <a href="mailto:info@goldcoastminingreview.com" className="block text-sm text-muted-foreground hover:text-gold transition-colors">
               info@goldcoastminingreview.com

@@ -38,6 +38,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/logo.svg" />
+        <meta name="theme-color" content="#000000" />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <a href="#content" className="sr-only focus:not-sr-only focus:!inline-block p-2 bg-gold text-black font-medium">

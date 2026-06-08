@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [contactInfo, setContactInfo] = useState({ phone: '+27 71 785 6901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: '' });
+  const [contactInfo, setContactInfo] = useState({ phone: '+2332433352901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: 'Kuma Office\nP O Box 31, Ejisu-Ashanti\nGPS: AE -0018-2670\n2 Libration Road Airport City Ghana' });
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
   useEffect(() => {

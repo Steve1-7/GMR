@@ -5,7 +5,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/shared/motion';
 import { Users, Globe, TrendingUp, Mail, Megaphone, Monitor, Newspaper, Calendar, ArrowRight } from 'lucide-react';
-import PricingPackages from '@/components/advertising/pricing-packages';
 
 const audienceStats = [
   { icon: Users, label: 'Monthly Readers', value: '180,000+' },
@@ -140,9 +139,6 @@ export default function AdvertisePage() {
           </div>
         </div>
       </section>
-
-      {/* Pricing Packages */}
-      <PricingPackages />
 
       {/* Contact CTA */}
       <section className="py-14">
