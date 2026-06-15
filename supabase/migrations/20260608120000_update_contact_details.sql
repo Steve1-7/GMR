@@ -10,7 +10,7 @@ SET value = jsonb_set(
           '"+2332433352901"'::jsonb
         ),
         '{officeAddress}',
-        '"Kuma Office"'::jsonb
+        '"Kumasi Office"'::jsonb
       ),
       '{officeAddress2}',
       '"P O Box 31, Ejisu-Ashanti"'::jsonb

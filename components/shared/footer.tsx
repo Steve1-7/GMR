@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Separator } from '@/components/ui/separator';
+import { Linkedin } from 'lucide-react';
 
 const footerSections = [
   {
@@ -78,6 +79,10 @@ export default function Footer() {
             </a>
             <a href="mailto:editorial@goldcoastminingreview.com" className="block text-sm text-muted-foreground hover:text-gold transition-colors">
               editorial@goldcoastminingreview.com
+            </a>
+            <a href="https://www.linkedin.com/company/gold-coast-mining-review-ghana/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-gold transition-colors">
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
             </a>
           </div>
         </div>
