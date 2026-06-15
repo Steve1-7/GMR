@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [contactInfo, setContactInfo] = useState({ phone: '+2332433352901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: 'Kuma Office\nP O Box 31, Ejisu-Ashanti\nGPS: AE -0018-2670\n2 Libration Road Airport City Ghana' });
+  const [contactInfo, setContactInfo] = useState({ phone: '+2332433352901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: '2 Libration Road\nAirport City\nGhana\n\nKumasi Office\nP O Box 31, Ejisu-Ashanti\nGPS: AE -0018-2670' });
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
   useEffect(() => {
@@ -128,6 +128,18 @@ export default function ContactPage() {
                     </div>
                   </div>
                 ))}
+
+                <div className="rounded-2xl overflow-hidden border border-border/30 bg-secondary/10">
+                  <div className="p-4">
+                    <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Location (Airport City)</div>
+                  </div>
+                  <iframe
+                    title="Airport City Location"
+                    src="https://www.google.com/maps?q=2+Libration+Road+Airport+City+Ghana&output=embed"
+                    className="w-full h-56"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </FadeIn>
           </div>
