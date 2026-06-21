@@ -111,7 +111,7 @@ export default function Footer() {
         <Separator className="my-12" />
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <p className="text-xs text-muted-foreground">
             &copy; 2026 Gold-Coast Mining Review. All rights reserved.
           </p>
