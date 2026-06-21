@@ -119,7 +119,8 @@ export default function Footer() {
             <span className="text-xs text-muted-foreground">
               Mining News. Data. Intelligence.
             </span>
-            <a href="https://eva-tech-studio.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <a href="https://eva-tech-studio.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gold/50 hover:text-gold transition-colors">
+              <span>Powered by</span>
               <Image
                 src="/home/logo5.svg"
                 alt="Eva-Tech-Studio"
