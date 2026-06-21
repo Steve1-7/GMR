@@ -121,38 +121,6 @@ export default function MarketIntelligence() {
             </FadeIn>
           ))}
         </div>
-
-        {marketIndicators.length > 0 && (
-        <FadeIn delay={0.3}>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {marketIndicators.map((ind: any) => {
-              const Icon = ICON_MAP[ind.icon] || BarChart3;
-              return (
-              <div key={ind.label} className="glass rounded-xl p-4 flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold/10">
-                  <Icon className="h-5 w-5 text-gold" />
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-foreground">
-                    <CountUp
-                      end={ind.value}
-                      prefix={ind.prefix || ''}
-                      suffix={ind.suffix || ''}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground">{ind.label}</span>
-                    <span className={`text-xs ${ind.change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {ind.change >= 0 ? '+' : ''}{ind.change}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-            })}
-          </div>
-        </FadeIn>
-        )}
       </div>
     </section>
   );

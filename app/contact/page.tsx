@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [contactInfo, setContactInfo] = useState({ phone: '+2332433352901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: '2 Libration Road\nAirport City\nGhana\n\nKumasi Office\nP O Box 31, Ejisu-Ashanti\nGPS: AE -0018-2670' });
+  const [contactInfo, setContactInfo] = useState({ phone: '+2332433352901', contactEmail: 'info@goldcoastminingreview.com', salesEmail: 'sales@goldcoastminingreview.com', officeAddress: '', officeAddress2: '', gpsAddress: '', mapAddress: '' });
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
   useEffect(() => {
@@ -44,7 +44,11 @@ export default function ContactPage() {
   };
 
   const infoItems = [
-    { icon: MapPin, label: 'Office', value: contactInfo.officeAddress || 'Contact us for office locations' },
+    { 
+      icon: MapPin, 
+      label: 'Office', 
+      value: contactInfo.mapAddress || contactInfo.officeAddress || 'Contact us for office locations' 
+    },
     { icon: Mail, label: 'Email', value: contactInfo.contactEmail },
     { icon: Phone, label: 'Phone', value: contactInfo.phone },
     { icon: Mail, label: 'Sales', value: contactInfo.salesEmail },

@@ -32,6 +32,7 @@ export default function AdminCompanies() {
     description: '',
     email: '',
     phone: '',
+    website: '',
     hq: '',
     employees: '',
     founded: '',
@@ -93,7 +94,7 @@ export default function AdminCompanies() {
       setNotification({ show: true, type: 'success', message: 'Company created successfully!' });
       setShowAddModal(false);
       setFormData({
-        name: '', type: 'Junior', category: 'Mining Services', description: '', email: '', phone: '',
+        name: '', type: 'Junior', category: 'Mining Services', description: '', email: '', phone: '', website: '',
         hq: '', employees: '', founded: '', projects: '', regions: [], featured: false,
         focus: '', stock_symbol: '', exchange: '', market_cap: '', market_cap_num: '', change: '', initials: ''
       });
@@ -169,6 +170,7 @@ export default function AdminCompanies() {
       description: company.description || '',
       email: company.email || '',
       phone: company.phone || '',
+      website: company.website || '',
       hq: company.hq || '',
       employees: company.employees?.toString() || '',
       founded: company.founded?.toString() || '',
@@ -324,6 +326,16 @@ export default function AdminCompanies() {
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
                           />
                         </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="website">Website URL</Label>
+                        <Input
+                          id="website"
+                          type="url"
+                          value={formData.website}
+                          onChange={(e) => setFormData({...formData, website: e.target.value})}
+                          placeholder="https://www.companyname.com"
+                        />
                       </div>
                       <div>
                         <Label htmlFor="hq">Headquarters</Label>
@@ -744,6 +756,16 @@ export default function AdminCompanies() {
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         />
                       </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="edit-website">Website URL</Label>
+                      <Input
+                        id="edit-website"
+                        type="url"
+                        value={formData.website}
+                        onChange={(e) => setFormData({...formData, website: e.target.value})}
+                        placeholder="https://www.companyname.com"
+                      />
                     </div>
                     <div>
                       <Label htmlFor="edit-hq">Headquarters</Label>

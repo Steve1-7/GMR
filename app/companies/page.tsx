@@ -212,23 +212,27 @@ export default function CompaniesPage() {
                         <span className="font-medium">Email:</span>
                         <a href={`mailto:${company.email}`} className="text-gold hover:underline truncate">{company.email}</a>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span className="font-medium">Website:</span>
-                        <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline truncate flex items-center gap-1">
-                          {company.website.replace('https://', '').replace('http://', '')}
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      </div>
+                      {company.website && (
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span className="font-medium">Website:</span>
+                          <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline truncate flex items-center gap-1">
+                            {company.website.replace('https://', '').replace('http://', '')}
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Hover action */}
-                  <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-200 border-t border-gold/20 bg-gold/5 px-6 py-3">
-                    <a href={company.website} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 text-xs font-semibold text-gold">
-                      <ExternalLink className="h-3 w-3" />
-                      Visit Website
-                    </a>
-                  </div>
+                  {company.website && (
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-200 border-t border-gold/20 bg-gold/5 px-6 py-3">
+                      <a href={company.website} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 text-xs font-semibold text-gold">
+                        <ExternalLink className="h-3 w-3" />
+                        Visit Website
+                      </a>
+                    </div>
+                  )}
                 </div>
               </FadeIn>
             ))}

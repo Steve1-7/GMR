@@ -12,6 +12,7 @@ interface BreakingNewsItem {
   headline: string;
   summary?: string;
   article_url?: string;
+  featured_image?: string;
 }
 
 interface HomepageStat {
@@ -25,25 +26,20 @@ interface HomepageStat {
 const STAT_COLORS = ['text-gold', 'text-emerald-400', 'text-blue-400', 'text-foreground'];
 
 export default function HeroSection() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [heroImages, setHeroImages] = useState<string[]>([]);
   const [showAd, setShowAd] = useState(true);
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
   const [breakingNewsItems, setBreakingNewsItems] = useState<BreakingNewsItem[]>([]);
   const [ads, setAds] = useState<any[]>([]);
-  const [stats, setStats] = useState<HomepageStat[]>([]);
 
   useEffect(() => {
     let mounted = true;
 
     async function fetchData() {
       try {
-        const [breakingRes, adsRes, bannersRes, statsRes] = await Promise.all([
+        const [breakingRes, adsRes] = await Promise.all([
           fetch('/api/breaking-news'),
           fetch('/api/ads?type=banner'),
-          fetch('/api/banners'),
-          fetch('/api/settings?key=homepage_stats'),
         ]);
 
         if (!mounted) return;
@@ -53,27 +49,6 @@ export default function HeroSection() {
 
         const adsJson = await adsRes.json();
         if (adsJson?.data) setAds(adsJson.data);
-
-        const bannersJson = await bannersRes.json();
-        if (bannersJson?.data?.length) {
-          const imgs = bannersJson.data.map((b: { image_url: string }) => b.image_url).filter(Boolean);
-          if (imgs.length) setHeroImages(imgs);
-        }
-
-        const statsJson = await statsRes.json();
-        if (statsJson?.data) {
-          const s = statsJson.data;
-          const mapped: HomepageStat[] = [
-            s.goldExports,
-            s.miningGrowth,
-            s.activeProjects,
-            s.companiesTracked,
-          ].filter(Boolean).map((stat: HomepageStat, i: number) => ({
-            ...stat,
-            color: STAT_COLORS[i % STAT_COLORS.length],
-          }));
-          if (mapped.length) setStats(mapped);
-        }
       } catch {
         // empty states handled in render
       }
@@ -82,14 +57,6 @@ export default function HeroSection() {
     fetchData();
     return () => { mounted = false; };
   }, []);
-
-  useEffect(() => {
-    if (heroImages.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
 
   useEffect(() => {
     if (ads.length <= 1) return;
@@ -108,7 +75,7 @@ export default function HeroSection() {
   }, [breakingNewsItems.length]);
 
   const currentNews = breakingNewsItems[currentNewsIndex] || null;
-  const bgImage = heroImages[currentImageIndex] || '/home/11.jpg';
+  const bgImage = currentNews?.featured_image || '/home/11.jpg';
 
   return (
     <>
@@ -193,7 +160,7 @@ export default function HeroSection() {
         <div className="absolute inset-0">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentImageIndex}
+              key={currentNews?.id || 'fallback'}
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
@@ -279,24 +246,6 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {stats.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="glass rounded-xl p-4 sm:p-6">
-                  <div className={`text-2xl font-bold sm:text-3xl ${stat.color || 'text-foreground'}`}>
-                    <CountUp end={stat.value} prefix={stat.prefix || ''} suffix={stat.suffix || ''} />
-                  </div>
-                  <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          )}
-
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -320,21 +269,6 @@ export default function HeroSection() {
               )}
             </div>
           </motion.div>
-
-          {heroImages.length > 1 && (
-            <div className="absolute bottom-8 right-8 flex gap-2">
-              {heroImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`h-2 w-2 rounded-full transition-all ${
-                    currentImageIndex === index ? 'bg-gold w-8' : 'bg-white/30 hover:bg-white/50'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </section>
     </>

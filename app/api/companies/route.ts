@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const featured = request.nextUrl.searchParams.get('featured');
-    let query = db.from('companies').select('*').order('featured', { ascending: false });
+    let query = db.from('companies').select('*').order('created_at', { ascending: false });
 
     if (featured === 'true') {
       query = query.eq('featured', true);
