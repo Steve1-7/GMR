@@ -119,9 +119,15 @@ export default function Footer() {
             <span className="text-xs text-muted-foreground">
               Mining News. Data. Intelligence.
             </span>
-            <span className="text-xs text-gold/50">
-              Done / Powered by Steve @ Eva-Tech-Studio
-            </span>
+            <a href="https://eva-tech-studio.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <Image
+                src="/home/logo5.svg"
+                alt="Eva-Tech-Studio"
+                width={100}
+                height={20}
+                className="h-5 w-auto"
+              />
+            </a>
           </div>
         </div>
       </div>
