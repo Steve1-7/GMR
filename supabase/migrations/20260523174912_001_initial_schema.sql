@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS authors (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE authors ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view authors" ON authors;
+DROP POLICY IF EXISTS "Public anon can view authors" ON authors;
 CREATE POLICY "Public can view authors" ON authors FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view authors" ON authors FOR SELECT TO anon USING (true);
 
@@ -66,6 +68,8 @@ CREATE TABLE IF NOT EXISTS articles (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view published articles" ON articles;
+DROP POLICY IF EXISTS "Public anon can view published articles" ON articles;
 CREATE POLICY "Public can view published articles" ON articles FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view published articles" ON articles FOR SELECT TO anon USING (true);
 
@@ -83,6 +87,8 @@ CREATE TABLE IF NOT EXISTS commodities (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE commodities ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view commodities" ON commodities;
+DROP POLICY IF EXISTS "Public anon can view commodities" ON commodities;
 CREATE POLICY "Public can view commodities" ON commodities FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view commodities" ON commodities FOR SELECT TO anon USING (true);
 
@@ -94,6 +100,8 @@ CREATE TABLE IF NOT EXISTS commodity_prices (
   recorded_at timestamptz DEFAULT now()
 );
 ALTER TABLE commodity_prices ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view commodity prices" ON commodity_prices;
+DROP POLICY IF EXISTS "Public anon can view commodity prices" ON commodity_prices;
 CREATE POLICY "Public can view commodity prices" ON commodity_prices FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view commodity prices" ON commodity_prices FOR SELECT TO anon USING (true);
 
@@ -112,6 +120,8 @@ CREATE TABLE IF NOT EXISTS companies (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE companies ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view companies" ON companies;
+DROP POLICY IF EXISTS "Public anon can view companies" ON companies;
 CREATE POLICY "Public can view companies" ON companies FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view companies" ON companies FOR SELECT TO anon USING (true);
 
@@ -132,6 +142,8 @@ CREATE TABLE IF NOT EXISTS projects (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view projects" ON projects;
+DROP POLICY IF EXISTS "Public anon can view projects" ON projects;
 CREATE POLICY "Public can view projects" ON projects FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view projects" ON projects FOR SELECT TO anon USING (true);
 
@@ -149,6 +161,8 @@ CREATE TABLE IF NOT EXISTS reports (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE reports ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view reports" ON reports;
+DROP POLICY IF EXISTS "Public anon can view reports" ON reports;
 CREATE POLICY "Public can view reports" ON reports FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view reports" ON reports FOR SELECT TO anon USING (true);
 
@@ -166,6 +180,8 @@ CREATE TABLE IF NOT EXISTS videos (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE videos ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view videos" ON videos;
+DROP POLICY IF EXISTS "Public anon can view videos" ON videos;
 CREATE POLICY "Public can view videos" ON videos FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view videos" ON videos FOR SELECT TO anon USING (true);
 
@@ -183,6 +199,8 @@ CREATE TABLE IF NOT EXISTS podcasts (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE podcasts ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view podcasts" ON podcasts;
+DROP POLICY IF EXISTS "Public anon can view podcasts" ON podcasts;
 CREATE POLICY "Public can view podcasts" ON podcasts FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view podcasts" ON podcasts FOR SELECT TO anon USING (true);
 
@@ -199,6 +217,8 @@ CREATE TABLE IF NOT EXISTS events (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view events" ON events;
+DROP POLICY IF EXISTS "Public anon can view events" ON events;
 CREATE POLICY "Public can view events" ON events FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view events" ON events FOR SELECT TO anon USING (true);
 
@@ -216,6 +236,8 @@ CREATE TABLE IF NOT EXISTS jobs (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view jobs" ON jobs;
+DROP POLICY IF EXISTS "Public anon can view jobs" ON jobs;
 CREATE POLICY "Public can view jobs" ON jobs FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view jobs" ON jobs FOR SELECT TO anon USING (true);
 
@@ -226,6 +248,7 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   subscribed_at timestamptz DEFAULT now()
 );
 ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Users can subscribe" ON newsletter_subscribers;
 CREATE POLICY "Users can subscribe" ON newsletter_subscribers FOR INSERT TO anon WITH CHECK (true);
 
 -- Insert seed commodity data
