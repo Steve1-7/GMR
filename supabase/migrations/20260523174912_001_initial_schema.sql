@@ -262,7 +262,8 @@ INSERT INTO commodities (name, symbol, current_price, price_change, price_change
   ('Bauxite', 'BAU', 52.00, 1.50, 2.97, 'USD/tonne', 'industrial-minerals'),
   ('Diamond', 'DIA', 8500.00, -120.00, -1.39, 'USD/ct', 'gemstones'),
   ('Iron Ore', 'FE', 118.50, 2.30, 1.98, 'USD/tonne', 'base-metals'),
-  ('Silver', 'XAG', 29.40, 0.65, 2.26, 'USD/oz', 'precious-metals');
+  ('Silver', 'XAG', 29.40, 0.65, 2.26, 'USD/oz', 'precious-metals')
+ON CONFLICT (symbol) DO NOTHING;
 
 -- Seed authors removed to avoid embedding production/demo content in migrations.
 -- Use explicit seed scripts or admin UI to add authors in production environments.
@@ -279,7 +280,8 @@ INSERT INTO companies (name, slug, country, type, description, stock_symbol, mar
   ('Rio Tinto', 'rio-tinto', 'UK', 'mining', 'Major diversified mining company with operations in Madagascar and Mozambique.', 'RIO', 95000000000),
   ('Chirano Gold Mines', 'chirano-gold', 'Ghana', 'mining', 'Ghana-based gold mining operation owned by Kinross Gold.', '', 1500000000),
   ('Ghana Manganese Company', 'ghana-manganese', 'Ghana', 'mining', 'Leading manganese producer in West Africa.', '', 800000000),
-  ('Asante Gold Corporation', 'asante-gold', 'Ghana', 'mining', 'Canadian-listed gold mining company focused on Ghana.', 'SE', 500000000);
+  ('Asante Gold Corporation', 'asante-gold', 'Ghana', 'mining', 'Canadian-listed gold mining company focused on Ghana.', 'SE', 500000000)
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed projects
 INSERT INTO projects (name, slug, country, minerals, status, company_id, investment_value, description) VALUES
@@ -290,7 +292,8 @@ INSERT INTO projects (name, slug, country, minerals, status, company_id, investm
   ('Nsuta Manganese Mine', 'nsuta-manganese', 'Ghana', ARRAY['manganese'], 'operating', (SELECT id FROM companies WHERE slug = 'ghana-manganese'), 150000000, 'One of the world''s richest manganese deposits.'),
   ('Kibali Gold Mine', 'kibali-gold', 'DRC', ARRAY['gold'], 'operating', (SELECT id FROM companies WHERE slug = 'anglogold-ashanti'), 1800000000, 'Africa''s largest gold mine located in northeastern DRC.'),
   ('Katanga Copper-Cobalt', 'katanga-copper-cobalt', 'DRC', ARRAY['copper', 'cobalt'], 'operating', NULL, 2600000000, 'Major copper-cobalt operation in the Katanga province.'),
-  ('Mbalam Iron Ore', 'mbalam-iron-ore', 'Cameroon', ARRAY['iron-ore'], 'development', NULL, 3500000000, 'Large-scale iron ore project straddling Cameroon and Congo.');
+  ('Mbalam Iron Ore', 'mbalam-iron-ore', 'Cameroon', ARRAY['iron-ore'], 'development', NULL, 3500000000, 'Large-scale iron ore project straddling Cameroon and Congo.')
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed reports
 INSERT INTO reports (title, slug, description, category, is_premium) VALUES
@@ -299,28 +302,32 @@ INSERT INTO reports (title, slug, description, category, is_premium) VALUES
   ('Mining ESG Compliance in Africa', 'mining-esg-compliance-africa', 'Assessment of ESG practices across major African mining operations and regulatory frameworks.', 'esg', true),
   ('West Africa Mining Investment Guide', 'west-africa-mining-investment', 'Investor''s guide to mining opportunities across West Africa with risk assessment and market analysis.', 'investment', true),
   ('Copper & Cobalt: DRC Market Analysis', 'drc-copper-cobalt-analysis', 'Market analysis of the DRC''s copper and cobalt sectors including production data and trade flows.', 'copper', false),
-  ('Commodity Price Forecast Q3 2026', 'commodity-forecast-q3-2026', 'Quarterly commodity price forecasts for precious metals, base metals, and battery minerals.', 'forecast', true);
+  ('Commodity Price Forecast Q3 2026', 'commodity-forecast-q3-2026', 'Quarterly commodity price forecasts for precious metals, base metals, and battery minerals.', 'forecast', true)
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed videos
 INSERT INTO videos (title, slug, description, category, duration) VALUES
   ('Inside Obuasi: Ghana''s Gold Renaissance', 'inside-obuasi-gold', 'A documentary exploring the transformation of AngloGold Ashanti''s Obuasi mine.', 'documentary', 1842),
   ('CEO Talk: Mining Leadership in Africa', 'ceo-talk-mining-leadership', 'Exclusive interview series with Africa''s top mining executives.', 'interview', 2400),
   ('Lithium Revolution: West Africa''s New Frontier', 'lithium-revolution-west-africa', 'Exploring the lithium exploration boom across West Africa.', 'documentary', 1560),
-  ('Market Pulse: Weekly Commodity Analysis', 'market-pulse-weekly', 'Weekly analysis of commodity price movements and market trends.', 'analysis', 900);
+  ('Market Pulse: Weekly Commodity Analysis', 'market-pulse-weekly', 'Weekly analysis of commodity price movements and market trends.', 'analysis', 900)
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed podcasts
 INSERT INTO podcasts (title, slug, description, episode_number, duration) VALUES
   ('The State of African Mining', 'state-of-african-mining', 'A comprehensive overview of the current mining landscape across the African continent.', 1, 2700),
   ('Gold and Governance', 'gold-and-governance', 'Examining the relationship between gold mining and governance in West Africa.', 2, 2400),
   ('Battery Minerals and Africa''s Future', 'battery-minerals-africa-future', 'How battery mineral demand is reshaping African mining investment.', 3, 3000),
-  ('Mining Finance Explained', 'mining-finance-explained', 'Understanding the financial mechanisms behind major mining projects.', 4, 1800);
+  ('Mining Finance Explained', 'mining-finance-explained', 'Understanding the financial mechanisms behind major mining projects.', 4, 1800)
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed events
 INSERT INTO events (title, slug, description, date, location) VALUES
   ('Africa Mining Indaba 2026', 'africa-mining-indaba-2026', 'The world''s largest mining investment conference focused on Africa.', '2026-02-02', 'Cape Town, South Africa'),
   ('Ghana Mining Expo 2026', 'ghana-mining-expo-2026', 'Ghana''s premier mining exhibition and conference.', '2026-06-15', 'Accra, Ghana'),
   ('PDAC 2026', 'pdac-2026', 'The Prospectors & Developers Association of Canada convention.', '2026-03-01', 'Toronto, Canada'),
-  ('Mining Indaba West Africa', 'mining-indaba-west-africa', 'Regional mining investment conference for West Africa.', '2026-09-20', 'Abuja, Nigeria');
+  ('Mining Indaba West Africa', 'mining-indaba-west-africa', 'Regional mining investment conference for West Africa.', '2026-09-20', 'Abuja, Nigeria')
+ON CONFLICT (slug) DO NOTHING;
 
 -- Insert seed jobs
 INSERT INTO jobs (title, company, location, type, salary_range, description) VALUES
