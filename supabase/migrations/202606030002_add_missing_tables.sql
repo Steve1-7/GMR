@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS magazines (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE magazines ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view magazines" ON magazines;
+DROP POLICY IF EXISTS "Public anon can view magazines" ON magazines;
 CREATE POLICY "Public can view magazines" ON magazines FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view magazines" ON magazines FOR SELECT TO anon USING (true);
 
@@ -40,6 +42,8 @@ CREATE TABLE IF NOT EXISTS banners (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE banners ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view banners" ON banners;
+DROP POLICY IF EXISTS "Public anon can view banners" ON banners;
 CREATE POLICY "Public can view banners" ON banners FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view banners" ON banners FOR SELECT TO anon USING (true);
 
@@ -60,6 +64,8 @@ CREATE TABLE IF NOT EXISTS advertisements (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE advertisements ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view advertisements" ON advertisements;
+DROP POLICY IF EXISTS "Public anon can view advertisements" ON advertisements;
 CREATE POLICY "Public can view advertisements" ON advertisements FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Public anon can view advertisements" ON advertisements FOR SELECT TO anon USING (true);
 
