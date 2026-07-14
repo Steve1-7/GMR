@@ -1,5 +1,8 @@
 DROP POLICY IF EXISTS "Public can view published breaking news" ON breaking_news;
 DROP POLICY IF EXISTS "Authenticated can view published breaking news" ON breaking_news;
+DROP POLICY IF EXISTS "Authenticated can insert breaking news" ON breaking_news;
+DROP POLICY IF EXISTS "Authenticated can update breaking news" ON breaking_news;
+DROP POLICY IF EXISTS "Authenticated can delete breaking news" ON breaking_news;
 
 -- Recreate SELECT policies
 CREATE POLICY "Public can view published breaking news" ON breaking_news
