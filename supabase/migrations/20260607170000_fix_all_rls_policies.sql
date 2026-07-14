@@ -176,6 +176,7 @@ CREATE POLICY "Authenticated can delete videos" ON videos
   USING (true);
 
 -- Advertisements
+DROP POLICY IF EXISTS "Public can view active advertisements" ON advertisements;
 DROP POLICY IF EXISTS "Public can view advertisements" ON advertisements;
 DROP POLICY IF EXISTS "Public anon can view advertisements" ON advertisements;
 DROP POLICY IF EXISTS "Authenticated can view advertisements" ON advertisements;
@@ -205,6 +206,7 @@ CREATE POLICY "Authenticated can delete advertisements" ON advertisements
   USING (true);
 
 -- Banners
+DROP POLICY IF EXISTS "Public can view active banners" ON banners;
 DROP POLICY IF EXISTS "Public can view banners" ON banners;
 DROP POLICY IF EXISTS "Public anon can view banners" ON banners;
 DROP POLICY IF EXISTS "Authenticated can view banners" ON banners;
