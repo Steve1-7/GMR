@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS site_settings (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE site_settings ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can read site settings" ON site_settings;
+DROP POLICY IF EXISTS "Authenticated can read site settings" ON site_settings;
 CREATE POLICY "Public can read site settings" ON site_settings FOR SELECT TO anon USING (true);
 CREATE POLICY "Authenticated can read site settings" ON site_settings FOR SELECT TO authenticated USING (true);
 
@@ -33,6 +35,8 @@ CREATE TABLE IF NOT EXISTS testimonials (
   updated_at timestamptz DEFAULT now()
 );
 ALTER TABLE testimonials ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view active testimonials" ON testimonials;
+DROP POLICY IF EXISTS "Public auth can view active testimonials" ON testimonials;
 CREATE POLICY "Public can view active testimonials" ON testimonials FOR SELECT TO anon USING (is_active = true);
 CREATE POLICY "Public auth can view active testimonials" ON testimonials FOR SELECT TO authenticated USING (is_active = true);
 
@@ -47,10 +51,13 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Anyone can submit contact form" ON contact_submissions;
 CREATE POLICY "Anyone can submit contact form" ON contact_submissions FOR INSERT TO anon WITH CHECK (true);
 
 -- Breaking news RLS
 ALTER TABLE breaking_news ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public can view published breaking news" ON breaking_news;
+DROP POLICY IF EXISTS "Authenticated can view published breaking news" ON breaking_news;
 CREATE POLICY "Public can view published breaking news" ON breaking_news
   FOR SELECT TO anon
   USING (status = 'published' AND publish_date <= now());
