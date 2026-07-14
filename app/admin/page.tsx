@@ -48,7 +48,7 @@ export default function AdminDashboard() {
     checkAuth();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_: string, session: any) => {
       if (!session) {
         router.push('/admin/login');
       } else {
