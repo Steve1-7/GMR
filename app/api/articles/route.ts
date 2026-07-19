@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { dbError, dbUnavailable, getAdminClient } from '@/lib/api-utils';
+import { dbError, dbUnavailable, getContentClient } from '@/lib/api-utils';
 
 export async function GET(request: NextRequest) {
-  const db = getAdminClient();
+  const db = getContentClient();
   if (!db) return dbUnavailable();
 
   try {
@@ -15,7 +15,6 @@ export async function GET(request: NextRequest) {
     let query = db
       .from('articles')
       .select('*, authors(name, title)')
-      .lte('published_at', new Date().toISOString())
       .order('published_at', { ascending: false });
 
     if (slug) {
@@ -26,7 +25,21 @@ export async function GET(request: NextRequest) {
     }
 
     const { data, error } = await query;
-    if (error) return dbError('Error fetching articles', error);
+    if (error) {
+      const fallbackQuery = db.from('articles').select('*, authors(name, title)').order('created_at', { ascending: false });
+      const { data: fallbackData, error: fallbackError } = await fallbackQuery;
+      if (fallbackError) return dbError('Error fetching articles', error);
+
+      const mapped = (fallbackData || []).map((article: Record<string, unknown>) => ({
+        ...article,
+        author: (article.authors as { name?: string } | null)?.name || null,
+        author_title: (article.authors as { title?: string } | null)?.title || null,
+        image: article.featured_image,
+        readingTime: article.reading_time,
+      }));
+
+      return NextResponse.json({ data: mapped });
+    }
 
     const mapped = (data || []).map((article: Record<string, unknown>) => ({
       ...article,

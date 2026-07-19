@@ -18,28 +18,28 @@ const options = [
     icon: Newspaper,
     title: 'Sponsored Content',
     description: 'Long-form sponsored articles crafted by our editorial team, distributed across our platform and newsletter. Clearly labeled, deeply trusted.',
-    price: 'From $3,500',
+    price: 'From $1,750',
     tag: 'Most Popular',
   },
   {
     icon: Monitor,
     title: 'Display Advertising',
     description: 'Premium banner and sidebar placements across the Gold-Coast Mining Review site, targeted by section, geography, or audience segment.',
-    price: 'From $1,200/mo',
+    price: 'From $600/mo',
     tag: null,
   },
   {
     icon: Mail,
     title: 'Newsletter Sponsorship',
     description: 'Reach 45,000+ mining professionals directly in their inbox. Exclusive category sponsorships and dedicated sends available.',
-    price: 'From $2,000',
+    price: 'From $1,000',
     tag: null,
   },
   {
     icon: Calendar,
     title: 'Events Partnership',
     description: 'Co-brand with Gold-Coast Mining Review at industry events, conferences, and summits. Title sponsorships and speaking slots available.',
-    price: 'From $5,000',
+    price: 'From $2,500',
     tag: 'Premium',
   },
 ];
@@ -156,7 +156,7 @@ export default function AdvertisePage() {
                     Get in Touch <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <a href="mailto:advertising@ghanaminingjournal.com">
+                <a href="mailto:info@goldcoastminingreview.com">
                   <Button variant="outline" className="border-border hover:border-gold/30 hover:text-gold gap-2">
                     <Mail className="h-4 w-4" /> Email Us
                   </Button>

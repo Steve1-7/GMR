@@ -80,10 +80,16 @@ export default function AdminAds() {
     const { error } = await supabase
       .from('advertisements')
       .insert([{
-        ...formData,
+        title: formData.title,
+        company_name: formData.company_name,
+        company_logo: formData.company_logo || '',
+        image_url: formData.image_url || '',
+        link_url: formData.link_url || '',
+        type: formData.type,
+        category: formData.category || '',
+        is_active: formData.is_active,
         start_date: formData.start_date ? new Date(formData.start_date).toISOString() : null,
         end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null,
-        priority: formData.priority || 0
       }]);
 
     if (error) {
@@ -100,10 +106,16 @@ export default function AdminAds() {
     const { error } = await supabase
       .from('advertisements')
       .update({
-        ...formData,
+        title: formData.title,
+        company_name: formData.company_name,
+        company_logo: formData.company_logo || '',
+        image_url: formData.image_url || '',
+        link_url: formData.link_url || '',
+        type: formData.type,
+        category: formData.category || '',
+        is_active: formData.is_active,
         start_date: formData.start_date ? new Date(formData.start_date).toISOString() : null,
         end_date: formData.end_date ? new Date(formData.end_date).toISOString() : null,
-        priority: formData.priority || 0
       })
       .eq('id', selectedAd.id);
 
