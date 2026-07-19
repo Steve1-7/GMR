@@ -167,15 +167,15 @@ export default function AIChatbot() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
-          className="fixed bottom-6 right-6 z-50"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
         >
           <Button
             onClick={() => setIsOpen(true)}
             size="lg"
-            className="h-14 w-14 rounded-full gold-gradient shadow-lg hover:shadow-gold/50 transition-all"
+            className="h-12 w-12 sm:h-14 sm:w-14 rounded-full gold-gradient shadow-lg hover:shadow-gold/50 transition-all"
             aria-label="Open AI Assistant"
           >
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
           </Button>
         </motion.div>
       )}

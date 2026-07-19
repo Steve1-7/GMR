@@ -61,14 +61,14 @@ export default function PremiumMarquee() {
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
       <div className="flex items-center">
         <motion.div
-          className="flex whitespace-nowrap py-3"
-          animate={{ x: [0, -1000] }}
+          className="flex whitespace-nowrap py-2 sm:py-3"
+          animate={{ x: [0, '-100%'] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         >
           {content.map((item, index) => (
             <span
               key={index}
-              className={`mx-6 text-sm font-medium ${item === '•' ? 'text-gold/60' : 'text-foreground'}`}
+              className={`mx-3 sm:mx-6 text-xs sm:text-sm font-medium ${item === '•' ? 'text-gold/60' : 'text-foreground'}`}
             >
               {item}
             </span>
@@ -76,14 +76,14 @@ export default function PremiumMarquee() {
         </motion.div>
 
         <motion.div
-          className="flex whitespace-nowrap py-3 absolute"
-          animate={{ x: [1000, 0] }}
+          className="flex whitespace-nowrap py-2 sm:py-3 absolute"
+          animate={{ x: ['100%', 0] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         >
           {content.map((item, index) => (
             <span
               key={`dup-${index}`}
-              className={`mx-6 text-sm font-medium ${item === '•' ? 'text-gold/60' : 'text-foreground'}`}
+              className={`mx-3 sm:mx-6 text-xs sm:text-sm font-medium ${item === '•' ? 'text-gold/60' : 'text-foreground'}`}
             >
               {item}
             </span>

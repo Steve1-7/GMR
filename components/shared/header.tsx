@@ -47,51 +47,51 @@ export default function Header() {
       <header className="sticky top-0 z-50 w-full">
         {/* Top bar */}
         <div className="border-b border-border/50 bg-background/80 backdrop-blur-xl">
-          <div className="mx-auto flex h-8 max-w-7xl items-center justify-between px-4 text-xs text-muted-foreground">
-            <div className="flex items-center gap-4">
-              <span>Africa&apos;s Mining Intelligence Platform</span>
+          <div className="mx-auto flex h-8 max-w-7xl items-center justify-between px-3 sm:px-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <span className="hidden sm:inline">Africa&apos;s Mining Intelligence Platform</span>
+              <span className="inline sm:hidden">GCMR</span>
               <span className="hidden sm:inline">|</span>
               <span className="hidden sm:inline">{today}</span>
             </div>
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-2 sm:gap-4">
               {/* Top Bar Advertisements */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                {topBarAds.map((ad) => (
+              <div className="flex items-center gap-1 sm:gap-2 sm:gap-3">
+                {topBarAds.slice(0, 1).map((ad) => (
                   <Link
                     key={ad.title}
                     href={ad.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 sm:gap-2 hover:opacity-80 transition-opacity"
+                    className="flex items-center gap-1 hover:opacity-80 transition-opacity"
                   >
                     <img
                       src={ad.image}
                       alt={ad.title}
-                      className="h-6 sm:h-7 w-auto object-contain"
+                      className="h-5 sm:h-6 sm:h-7 w-auto object-contain"
                     />
-                    <span className="hidden md:inline text-gold font-semibold text-xs">{ad.title}</span>
                   </Link>
                 ))}
               </div>
-              <Link href="/subscribe" className="hover:text-gold transition-colors text-gold font-medium text-xs sm:text-sm">Subscribe</Link>
-              <Link href="/advertise" className="hover:text-foreground transition-colors font-semibold text-xs sm:text-sm hidden sm:inline">Advertise</Link>
-              <Link href="/contact" className="hover:text-foreground transition-colors text-xs sm:text-sm hidden sm:inline">Contact</Link>
+              <Link href="/subscribe" className="hover:text-gold transition-colors text-gold font-medium text-xs">Subscribe</Link>
+              <Link href="/advertise" className="hover:text-foreground transition-colors font-semibold text-xs hidden sm:inline">Advertise</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors text-xs hidden sm:inline">Contact</Link>
             </div>
           </div>
         </div>
 
         {/* Main nav */}
         <div className="border-b border-border bg-background/90 backdrop-blur-xl">
-          <div className="mx-auto flex h-16 md:h-20 max-w-7xl items-center justify-between px-4">
+          <div className="mx-auto flex h-14 sm:h-16 md:h-20 max-w-7xl items-center justify-between px-3 sm:px-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3">
               <Image
                 src="/gold.webp"
                 alt="Gold-Coast Mining Review"
                 width={560}
                 height={96}
                 priority
-                className="h-20 md:h-24 w-auto"
+                className="h-14 sm:h-16 md:h-20 md:h-24 w-auto"
               />
               <div className="hidden md:flex flex-col">
                 <span className="text-xl font-bold gold-gradient-text">Gold-Coast Mining Review</span>

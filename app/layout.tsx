@@ -42,6 +42,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/logo.svg" />
         <meta name="theme-color" content="#000000" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
